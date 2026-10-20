@@ -31,6 +31,19 @@ buildFHSEnv {
 
   targetPkgs =
     pkgs: with pkgs; [
+      libxrandr
+      xdg-utils
+      p7zip
+      unzip
+      gsettings-desktop-schemas
+      hicolor-icon-theme
+      fontconfig
+      freetype
+      lsb-release
+    ];
+
+  multiPkgs =
+    pkgs: with pkgs; [
       alsa-lib
       at-spi2-core
       cairo
@@ -62,6 +75,7 @@ buildFHSEnv {
       libxkbcommon
       libxrandr
       libxrender
+      libxshmfence
       libxscrnsaver
       libxtst
       nspr
@@ -72,6 +86,22 @@ buildFHSEnv {
       udev
       xdg-utils
       zlib
+      lttng-ust_2_12
+      krb5
+      libva
+      wayland
+      cpio
+      libpulseaudio
+      libxml2_13
+      clang
+      git
+      harfbuzz
+      vulkan-loader
+      libice
+      libsm
+      corefonts
+      dejavu_fonts
+      liberation_ttf
     ];
 
   extraBuildCommands = ''

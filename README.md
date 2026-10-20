@@ -2,6 +2,8 @@
 
 Tuanjie Hub 1.4.7，重打包自deb包
 
+使用 FHS 环境运行 Hub 及其安装的编辑器，包含 nixpkgs Unity Hub 打包所列的编辑器、授权服务、Bug Reporter、字体和辅助工具依赖。`libxml2_13` 提供编辑器需要的 `libxml2.so.2`。
+
 ## 使用
 
 ```sh
