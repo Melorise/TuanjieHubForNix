@@ -3,11 +3,28 @@
   stdenvNoCC,
   libarchive,
   buildFHSEnv,
+  makeFontsConf,
+  fontconfig,
+  noto-fonts-cjk-sans,
+  corefonts,
+  dejavu_fonts,
+  liberation_ttf,
   src,
 }:
 
 let
   version = "1.4.7";
+  editorFonts = [
+    (noto-fonts-cjk-sans.override { static = true; })
+    corefonts
+    dejavu_fonts
+    liberation_ttf
+  ];
+  fontsConf = makeFontsConf {
+    fontDirectories = editorFonts;
+    impureFontDirectories = [ ];
+    includes = [ "${fontconfig.out}/etc/fonts/conf.d" ];
+  };
   unpacked = stdenvNoCC.mkDerivation {
     pname = "tuanjiehub-unpacked";
     inherit version src;
@@ -40,7 +57,7 @@ buildFHSEnv {
       fontconfig
       freetype
       lsb-release
-    ];
+    ] ++ editorFonts;
 
   multiPkgs =
     pkgs: with pkgs; [
@@ -99,9 +116,6 @@ buildFHSEnv {
       vulkan-loader
       libice
       libsm
-      corefonts
-      dejavu_fonts
-      liberation_ttf
     ];
 
   extraBuildCommands = ''
@@ -111,6 +125,10 @@ buildFHSEnv {
   '';
 
   runScript = "/opt/tuanjiehub/tuanjiehub";
+
+  profile = ''
+    export FONTCONFIG_FILE="${fontsConf}"
+  '';
 
   extraInstallCommands = ''
     mkdir -p "$out/share"
